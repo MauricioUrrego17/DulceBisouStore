@@ -1,91 +1,63 @@
-// Datos de ejemplo (en el futuro vendrán de Supabase)
-const lociones = [
-    { referencia: "Hugo Boss", nombre: "Hugo Boss XY", imagen: "Hugo-boss-xy.jpg" },
-    { referencia: "Hugo Boss", nombre: "Hugo Boss Red", imagen: "Hugo-boss-xy.jpg" },
-    { referencia: "Chanel", nombre: "Chanel N°5", imagen: "chanel-no5.jpg" },
-    { referencia: "Chanel", nombre: "Chanel Coco Mademoiselle", imagen: "chanel-no5.jpg" },
-    { referencia: "Lacoste", nombre: "Lacoste L.12.12", imagen: "lacoste-l12.jpg" },
-    { referencia: "Lacoste", nombre: "Lacoste Essential", imagen: "lacoste-l12.jpg" },
-];
+// Crear el cliente de Supabase usando la versión UMD (sin import)
+const supabase = window.supabase.createClient(
+    "https://bkiqjtkqnnvhmerirogw.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJraXFqdGtxbm52aG1lcmlyb2d3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg3MDg3MDYsImV4cCI6MjA1NDI4NDcwNn0.ogl00JDOg_avC_9KItXT5hpXQa2DO45TzVKteAEGk9g"
+);
 
-// Función para mostrar lociones por referencia
+let productos = []; // Variable global para almacenar los productos
+
+async function probarConexion() {
+    console.log("Probando conexión a Supabase...");
+
+    // Intenta obtener datos de la tabla tblProducto
+    const { data, error } = await supabase.from("tblProducto").select("*");
+
+    if (error) {
+        console.error("Error conectando a Supabase:", error);
+    } else {
+        console.log("Conexión exitosa. Datos obtenidos:", data);
+        productos = data; // Almacenar los productos en la variable global
+        mostrarProductos(productos); // Mostrar todos los productos al cargar la página
+    }
+}
+
+function mostrarProductos(productos) {
+    const contenedor = document.getElementById("producto");
+    contenedor.innerHTML = ""; // Limpiar antes de agregar
+
+    // Verificar si hay productos
+    if (productos.length === 0) {
+        contenedor.innerHTML = "<p>No hay productos disponibles.</p>";
+        return;
+    }
+
+    // Mostrar los productos en el contenedor
+    productos.forEach(producto => {
+        const productoHTML = `
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="${producto.imagen}" class="card-img-top" alt="${producto.referencia}">
+                    <div class="card-body">
+                        <h5 class="card-title">${producto.descripcion}</h5>
+                        <p class="card-text"><strong>Precio:</strong> $${producto.precio}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        contenedor.innerHTML += productoHTML;
+    });
+}
+
+// Función para filtrar productos por referencia
 function mostrarLocionesPorReferencia(referencia) {
-    const catalogoContainer = document.getElementById("catalogo-container");
-    catalogoContainer.innerHTML = ""; // Limpiar el contenedor
-
-    // Filtrar lociones por referencia
-    const locionesFiltradas = lociones.filter((locion) => locion.referencia === referencia);
-
-    // Mostrar las lociones filtradas
-    locionesFiltradas.forEach((locion) => {
-        const col = document.createElement("div");
-        col.className = "col-md-4 mb-4";
-
-        const card = document.createElement("div");
-        card.className = "card";
-
-        const img = document.createElement("img");
-        img.src = `../img/${locion.imagen}`;
-        img.className = "card-img-top";
-        img.alt = locion.nombre;
-
-        const cardBody = document.createElement("div");
-        cardBody.className = "card-body";
-
-        const title = document.createElement("h5");
-        title.className = "card-title";
-        title.textContent = locion.nombre;
-
-        const referenciaText = document.createElement("p");
-        referenciaText.className = "card-text";
-        referenciaText.textContent = `Referencia: ${locion.referencia}`;
-
-        cardBody.appendChild(title);
-        cardBody.appendChild(referenciaText);
-        card.appendChild(img);
-        card.appendChild(cardBody);
-        col.appendChild(card);
-        catalogoContainer.appendChild(col);
-    });
+    const productosFiltrados = productos.filter(producto => producto.referencia === referencia);
+    mostrarProductos(productosFiltrados);
 }
 
-// Función para cargar todas las lociones
+// Función para mostrar todos los productos
 function cargarTodasLasLociones() {
-    const catalogoContainer = document.getElementById("catalogo-container");
-    catalogoContainer.innerHTML = ""; // Limpiar el contenedor
-
-    // Mostrar todas las lociones
-    lociones.forEach((locion) => {
-        const col = document.createElement("div");
-        col.className = "col-md-4 mb-4";
-
-        const card = document.createElement("div");
-        card.className = "card";
-
-        const img = document.createElement("img");
-        img.src = `../img/${locion.imagen}`;
-        img.className = "card-img-top";
-        img.alt = locion.nombre;
-
-        const cardBody = document.createElement("div");
-        cardBody.className = "card-body";
-
-        const title = document.createElement("h5");
-        title.className = "card-title";
-        title.textContent = locion.nombre;
-
-        const referenciaText = document.createElement("p");
-        referenciaText.className = "card-text";
-        referenciaText.textContent = `Referencia: ${locion.referencia}`;
-
-        cardBody.appendChild(title);
-        cardBody.appendChild(referenciaText);
-        card.appendChild(img);
-        card.appendChild(cardBody);
-        col.appendChild(card);
-        catalogoContainer.appendChild(col);
-    });
+    mostrarProductos(productos);
 }
 
-// Ejecutar la función al cargar la página
-document.addEventListener("DOMContentLoaded", cargarTodasLasLociones);
+// Ejecuta la prueba al cargar la página
+document.addEventListener("DOMContentLoaded", probarConexion);
