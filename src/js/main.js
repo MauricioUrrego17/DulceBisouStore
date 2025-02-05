@@ -36,7 +36,7 @@ function mostrarProductos(productos) {
         const productoHTML = `
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
-                    <img src="${producto.imagen}" class="card-img-top" alt="${producto.referencia}">
+                    <img src="${producto.imagen}" class="card-img-top" alt="${producto.referencia}" data-producto='${JSON.stringify(producto)}'>
                     <div class="card-body">
                         <h5 class="card-title">${producto.descripcion}</h5>
                         <p class="card-text"><strong>Precio:</strong> $${producto.precio}</p>
@@ -45,6 +45,16 @@ function mostrarProductos(productos) {
             </div>
         `;
         contenedor.innerHTML += productoHTML;
+    });
+
+    // Agregar event listeners a las imágenes después de que se rendericen
+    const imagenes = document.querySelectorAll(".card-img-top");
+    imagenes.forEach(imagen => {
+        imagen.addEventListener("click", () => {
+            const producto = JSON.parse(imagen.getAttribute("data-producto"));
+            localStorage.setItem('productoSeleccionado', JSON.stringify(producto)); // Almacenar en localStorage
+            window.location.href = 'description.html'; // Redirigir a description.html
+        });
     });
 }
 
@@ -61,3 +71,16 @@ function cargarTodasLasLociones() {
 
 // Ejecuta la prueba al cargar la página
 document.addEventListener("DOMContentLoaded", probarConexion);
+
+// Función para mostrar los datos del producto en la consola
+function mostrarDatosProducto(producto) {
+    console.log("Datos del producto seleccionado:", producto);
+}
+
+// Función para seleccionar un producto y redirigir a description.html
+function seleccionarProducto(producto) {
+    // Guardar el producto en localStorage
+    localStorage.setItem('productoSeleccionado', JSON.stringify(producto));
+    // Redirigir a description.html
+    window.location.href = 'description.html';
+}
