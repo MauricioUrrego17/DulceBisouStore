@@ -37,16 +37,28 @@
     <main class="container my-5">
         <section id="catalogo">
             <h2 class="text-center">Catálogo de Fragancias</h2>
+
             <!-- Carrusel de marcas para filtrar -->
-            <div id="carouselMarcas" class="carousel slide my-4" data-bs-interval="false">
+            <div id="carouselMarcas" class="carousel slide my-4" data-bs-ride="carousel">
                 <div class="carousel-inner text-center">
                     <div class="carousel-item active">
-                        <img src="../img/chanel.jpeg" class="d-block mx-auto" width="200" onclick="mostrarLocionesPorReferencia('Chanel')" alt="Chanel">
+                        <div class="d-flex justify-content-around">
+                            <img src="/src/img/calvin-klein.svg" class="d-block" style="width: 200px;" onclick="mostrarLocionesPorReferencia('Hugo Boss')" alt="Hugo Boss">
+                            <img src="/src/img/carolina-herrera.svg" class="d-block" style="width: 200px;" onclick="mostrarLocionesPorReferencia('Chanel')" alt="Chanel">
+                            <img src="/src/img/chanel.svg" class="d-block" style="width: 200px;" onclick="mostrarLocionesPorReferencia('Lacoste')" alt="Lacoste">
+                            <img src="/src/img/dior.svg" class="d-block" style="width: 200px;" onclick="cargarTodasLasLociones()" alt="Mostrar Todas">
+                        </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="../img/lacoste.jpg" class="d-block mx-auto" width="200" onclick="mostrarLocionesPorReferencia('Lacoste')" alt="Lacoste">
+                        <div class="d-flex justify-content-around">
+                            <img src="/src/img/Lacoste.svg" class="d-block" style="width: 200px;" onclick="mostrarLocionesPorReferencia('Chanel')" alt="Chanel">
+                            <img src="/src/img/lattafa.svg" class="d-block" style="width: 200px;" onclick="mostrarLocionesPorReferencia('Lacoste')" alt="Lacoste">
+                            <img src="/src/img/montblanc.svg" class="d-block" style="width: 200px;" onclick="cargarTodasLasLociones()" alt="Mostrar Todas">
+                            <img src="/src/img/Rabanne.svg" class="d-block" style="width: 200px;" onclick="cargarTodasLasLociones()" alt="Mostrar Todas">
+                        </div>
                     </div>
                 </div>
+                <!-- Controles del carrusel -->
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselMarcas" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Anterior</span>

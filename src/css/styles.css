@@ -21,3 +21,34 @@ footer {
     color: white;
     padding: 1rem 0;
 }
+
+/* Estilos para los controles del carrusel */
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: rgba(172, 135, 32, 0.5); /* Fondo semi-transparente */
+    width: 40px; /* Ancho de los botones */
+    height: 40px; /* Alto de los botones */
+    border-radius: 50%; /* Forma circular */
+    top: 50%; /* Centrar verticalmente */
+    transform: translateY(-50%);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: brightness(0) invert(1); /* Cambiar el color de los íconos a blanco */
+}
+
+/* Ajustes para las imágenes del carrusel */
+.carousel-inner .d-flex {
+    padding: 0 50px; /* Espacio a los lados para los controles */
+}
+
+.carousel-item img {
+    margin: 0 10px; /* Espacio entre las imágenes */
+    transition: transform 0.3s ease; /* Transición suave */
+    border-color: gold
+}
+
+.carousel-item img:hover {
+    transform: scale(1.1); /* Ampliar la imagen al 110% de su tamaño */
+}
