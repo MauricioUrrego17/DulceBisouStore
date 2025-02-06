@@ -35,28 +35,44 @@
     <!-- Contenido principal -->
     <main class="container my-5">
         <section id="catalogo">
-            <h2>Catálogo de Fragancias</h2>
-            <!-- Dropdown para filtrar por referencia -->
-            <div class="mb-4"> 
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        Filtrar por referencia
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#" onclick="mostrarLocionesPorReferencia('Hugo Boss')">Hugo Boss</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="mostrarLocionesPorReferencia('Chanel')">Chanel</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="mostrarLocionesPorReferencia('Lacoste')">Lacoste</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="cargarTodasLasLociones()">Mostrar Todas</a></li>
-                    </ul>
+            <h2 class="text-center">Catálogo de Fragancias</h2>
+
+            <!-- Carrusel de marcas para filtrar -->
+            <div id="carouselMarcas" class="carousel slide my-4" data-bs-ride="carousel">
+                <div class="carousel-inner text-center">
+                    <div class="carousel-item active">
+                        <div class="d-flex justify-content-around">
+                            <img src="/src/img/calvin-klein.svg" class="d-block" style="width: 200px;" onclick="mostrarLocionesPorReferencia('Hugo Boss')" alt="Hugo Boss">
+                            <img src="/src/img/carolina-herrera.svg" class="d-block" style="width: 200px;" onclick="mostrarLocionesPorReferencia('Chanel')" alt="Chanel">
+                            <img src="/src/img/chanel.svg" class="d-block" style="width: 200px;" onclick="mostrarLocionesPorReferencia('Lacoste')" alt="Lacoste">
+                            <img src="/src/img/dior.svg" class="d-block" style="width: 200px;" onclick="cargarTodasLasLociones()" alt="Mostrar Todas">
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="d-flex justify-content-around">
+                            <img src="/src/img/Lacoste.svg" class="d-block" style="width: 200px;" onclick="mostrarLocionesPorReferencia('Chanel')" alt="Chanel">
+                            <img src="/src/img/lattafa.svg" class="d-block" style="width: 200px;" onclick="mostrarLocionesPorReferencia('Lacoste')" alt="Lacoste">
+                            <img src="/src/img/montblanc.svg" class="d-block" style="width: 200px;" onclick="cargarTodasLasLociones()" alt="Mostrar Todas">
+                            <img src="/src/img/Rabanne.svg" class="d-block" style="width: 200px;" onclick="cargarTodasLasLociones()" alt="Mostrar Todas">
+                        </div>
+                    </div>
                 </div>
+                <!-- Controles del carrusel -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselMarcas" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselMarcas" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
             </div>
-            <!-- Contenedor para las lociones -->
+
+            <!-- Contenedor de productos -->
             <div class="row" id="catalogo-container">
                 <div id="producto"></div>
-                <!-- Aquí se cargarán  las lociones -->
             </div>
         </section>
-      
     </main>
 
     <!-- Footer -->
