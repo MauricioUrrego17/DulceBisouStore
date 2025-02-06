@@ -58,11 +58,12 @@ function mostrarProductos(productos) {
     });
 }
 
-// Función para filtrar productos por referencia
 function mostrarLocionesPorReferencia(referencia) {
-    const productosFiltrados = productos.filter(producto => producto.referencia === referencia);
+    // Convertir la referencia a minúsculas para hacer la comparación insensible a mayúsculas/minúsculas
+    const productosFiltrados = productos.filter(producto => producto.referencia.toLowerCase().includes(referencia.toLowerCase()));
     mostrarProductos(productosFiltrados);
 }
+
 
 // Función para mostrar todos los productos
 function cargarTodasLasLociones() {
