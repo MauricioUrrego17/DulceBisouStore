@@ -52,3 +52,49 @@ footer {
 .carousel-item img:hover {
     transform: scale(1.1); /* Ampliar la imagen al 110% de su tamaño */
 }
+
+/* Estilos para el carrusel en dispositivos móviles */
+@media (max-width: 767.98px) {
+    .carousel-inner .d-flex {
+        flex-direction: column; /* Cambiar la dirección a columna */
+        align-items: center; /* Centrar las imágenes */
+    }
+
+    .carousel-item img {
+        margin: 10px 0; /* Espacio entre las imágenes */
+        width: 80%; /* Reducir el tamaño de las imágenes */
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 30px; /* Reducir el tamaño de los controles */
+        height: 30px;
+    }
+}
+
+/* Estilos para el contenedor de productos */
+#catalogo-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* Estilos para las tarjetas de productos */
+.card {
+    flex: 1 1 calc(33.333% - 20px); /* 3 columnas por defecto */
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 767.98px) {
+    .card {
+        flex: 1 1 calc(50% - 20px); /* 2 columnas en móviles */
+    }
+}
+
+@media (max-width: 575.98px) {
+    .card {
+        flex: 1 1 calc(100% - 20px); /* 1 columna en móviles muy pequeños */
+    }
+}

@@ -22,7 +22,7 @@ async function probarConexion() {
 }
 
 function mostrarProductos(productos) {
-    const contenedor = document.getElementById("producto");
+    const contenedor = document.getElementById("catalogo-container");
     contenedor.innerHTML = ""; // Limpiar antes de agregar
 
     // Verificar si hay productos
@@ -31,21 +31,23 @@ function mostrarProductos(productos) {
         return;
     }
 
-    // Mostrar los productos en el contenedor
+    //const contenedorProducto = document.getElementById("catalogo-container");
+
     productos.forEach(producto => {
-        const productoHTML = `
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="${producto.imagen}" class="card-img-top" alt="${producto.referencia}" data-producto='${JSON.stringify(producto)}'>
-                    <div class="card-body">
-                        <h5 class="card-title">${producto.descripcion}</h5>
-                        <p class="card-text"><strong>Precio:</strong> $${producto.precio}</p>
-                    </div>
+    const productoHTML = `
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="${producto.imagen}" class="card-img-top" alt="${producto.referencia}" data-producto='${JSON.stringify(producto)}'>
+                <div class="card-body">
+                    <h6 class="card-subtitle text-muted">${producto.referencia}</h6>
+                    <h5 class="card-title">${producto.nombre}</h5>
+                    <p class="card-text"><strong>Precio:</strong> $${producto.precio}</p>
                 </div>
             </div>
-        `;
-        contenedor.innerHTML += productoHTML;
-    });
+        </div>
+    `;
+    contenedor.innerHTML += productoHTML;
+});
 
     // Agregar event listeners a las imágenes después de que se rendericen
     const imagenes = document.querySelectorAll(".card-img-top");
